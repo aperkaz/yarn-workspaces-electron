@@ -6,7 +6,8 @@
   "workspaces": [
     "add-workspace",
     "main",
-    "frontend"
+    "frontend",
+    "backend"
   ],
   "repository": "git@github.com:aperkaz/yarn-workspaces-electron.git",
   "author": "alain <alainperkaz@gmail.com>",
