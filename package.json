@@ -1,15 +1,17 @@
 {
   "name": "yarn-workspaces-electron",
   "version": "1.0.0",
-  "description": "Yarn workspaces with electron, for fun and profit",
   "private": true,
-  "workspaces": {
-    "packages": [
-      "frontend",
-      "backend",
-      "shared"
-    ]
+  "workspaces": [
+    "frontend",
+    "backend",
+    "shared"
+  ],
+  "scripts": {
+    "backend": "yarn workspace backend",
+    "shared": "yarn workspace shared"
   },
+  "description": "Yarn workspaces with electron, for fun and profit",
   "repository": "git@github.com:aperkaz/yarn-workspaces-electron.git",
   "author": "alain <alainperkaz@gmail.com>",
   "license": "MIT"

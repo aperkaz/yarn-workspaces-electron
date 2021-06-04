@@ -1,14 +1,15 @@
 {
-  "name": "backend",
+  "name": "shared",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "watch": "rimraf build; tsc -w --preserveWatchOutput",
+    "build": "rimraf build; tsc"
+  },
   "license": "MIT",
   "engines": {
     "node": ">=14.15.4"
-  },
-  "scripts": {
-    "build": "rimraf build; tsc --build",
-    "start": "yarn build && node dist/index.js"
   },
   "dependencies": {
     "sharp": "^0.28.3"
