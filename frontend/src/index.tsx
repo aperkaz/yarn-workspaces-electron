@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import { add } from 'shared';
+
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <div>MY NAME IS JEFF</div>
+    <div>MY NAME IS JEFF {add(1, 1)}</div>
   </React.StrictMode>,
   document.getElementById('root')
 );

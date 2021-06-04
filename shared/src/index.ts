@@ -15,4 +15,4 @@ export const sharp = async () => {
 /**
  * Hi from module
  */
-export const add = (a: number, b) => a + b;
+export const add = (a: number, b) => a + b + 4;

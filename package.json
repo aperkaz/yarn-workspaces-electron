@@ -8,7 +8,8 @@
     "shared"
   ],
   "scripts": {
-    "backend": "yarn workspace backend",
+    "fe": "yarn workspace frontend",
+    "be": "yarn workspace backend",
     "shared": "yarn workspace shared"
   },
   "description": "Yarn workspaces with electron, for fun and profit",

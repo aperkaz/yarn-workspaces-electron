@@ -1,6 +1,6 @@
 {
-  "name": "@taggr/frontend",
-  "version": "0.1.0",
+  "name": "frontend",
+  "version": "1.0.0",
   "homepage": "./",
   "scripts": {
     "watch": "react-scripts start",
