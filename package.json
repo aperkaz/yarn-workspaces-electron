@@ -5,7 +5,14 @@
   "workspaces": [
     "frontend",
     "backend",
-    "shared"
+    "shared",
+    "electron"
+  ],
+  "nohoist": [
+    "**/electron",
+    "**/electron/**",
+    "**/jest",
+    "**/jest/**"
   ],
   "scripts": {
     "fe": "yarn workspace frontend",
