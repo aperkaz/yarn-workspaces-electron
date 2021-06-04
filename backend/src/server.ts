@@ -1,7 +1,7 @@
 let serverHandlers = require("./server-handlers");
 let ipc = require("./server-ipc");
 
-console.log("HELLO FROM backend workspace");
+console.log("HELLO FROM workspace");
 
 let isDev, version;
 

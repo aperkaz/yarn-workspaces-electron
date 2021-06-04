@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { add } from 'shared';
+import { add } from '@test/shared';
 
 import reportWebVitals from './reportWebVitals';
 

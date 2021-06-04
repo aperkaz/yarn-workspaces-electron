@@ -1,11 +1,11 @@
 {
-  "name": "shared",
+  "name": "@test/shared",
   "version": "1.0.0",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
-    "watch": "rimraf build; tsc -w ",
-    "build": "rimraf build; tsc"
+    "watch": "yarn build; tsc -w --preserveWatchOutput",
+    "build": "rimraf build; tsc --build"
   },
   "license": "MIT",
   "engines": {

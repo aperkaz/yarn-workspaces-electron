@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "workspaces": [
-    "frontend",
     "backend",
-    "shared",
-    "electron"
+    "shared"
   ],
   "nohoist": [
     "**/electron",
@@ -18,12 +16,16 @@
     "fe": "yarn workspace frontend",
     "be": "yarn workspace backend",
     "shared": "yarn workspace shared",
+    "watch": "yarn wsrun --stages build",
     "electron": "yarn workspace electron"
   },
   "description": "Yarn workspaces with electron, for fun and profit",
   "repository": "git@github.com:aperkaz/yarn-workspaces-electron.git",
   "author": "alain <alainperkaz@gmail.com>",
   "license": "MIT",
+  "dependencies": {
+    "concurrently": "^6.2.0"
+  },
   "devDependencies": {
     "wsrun": "^5.2.4"
   }

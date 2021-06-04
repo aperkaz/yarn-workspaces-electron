@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "isolatedModules": false,
     /* Basic Options */
     "declaration": true,
     "declarationMap": true,
@@ -8,5 +9,5 @@
     "outDir": "build",
     "rootDir": "src"
   },
-  "include": ["src"]
+  "include": ["src/**/*"]
 }

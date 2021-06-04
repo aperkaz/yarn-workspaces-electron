@@ -1,4 +1,4 @@
-import { add, sharp } from "shared";
+import { add, sharp } from "@test/shared";
 
 sharp();
 
