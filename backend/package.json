@@ -1,15 +1,15 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "license": "MIT",
   "engines": {
     "node": ">=14.15.4"
   },
   "scripts": {
-    "build": "rimraf build; tsc --build",
-    "start": "yarn build && node dist/index.js"
+    "watch": "rimraf build; tsc -w --preserveWatchOutput",
+    "build": "rimraf build; tsc --build"
   },
   "devDependencies": {
     "@types/node": "^15.6.1",

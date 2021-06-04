@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     /* Basic Options */
-    "outDir": "dist",
-    "rootDir": "src"
+    "outDir": "build",
+    "rootDir": "src",
+    "allowJs": true
   },
   "include": ["src"],
   "references": [{ "path": "../shared" }]

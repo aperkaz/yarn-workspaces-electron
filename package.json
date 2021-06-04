@@ -17,10 +17,14 @@
   "scripts": {
     "fe": "yarn workspace frontend",
     "be": "yarn workspace backend",
-    "shared": "yarn workspace shared"
+    "shared": "yarn workspace shared",
+    "electron": "yarn workspace electron"
   },
   "description": "Yarn workspaces with electron, for fun and profit",
   "repository": "git@github.com:aperkaz/yarn-workspaces-electron.git",
   "author": "alain <alainperkaz@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "wsrun": "^5.2.4"
+  }
 }
