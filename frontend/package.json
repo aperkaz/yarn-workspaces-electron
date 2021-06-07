@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "homepage": "./",
   "scripts": {
-    "watch": "rimraf ../backend/build-frontend; mkdir ../backend/build-frontend; react-app-rewired start;",
+    "watch": "react-app-rewired start",
     "build": "rimraf ../backend/build-frontend; mkdir ../backend/build-frontend; react-app-rewired build; cpx \"build/**\" \"../backend/build-frontend\"",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"

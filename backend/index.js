@@ -5,11 +5,14 @@ let path = require('path');
 let isDev = require('electron-is-dev');
 
 let FE_DEV = isDev;
+let FE_DEBUG = false;
 let BE_DEV = isDev;
-// FE_DEV = true;
-// BE_DEV = true;
 
-let findOpenSocket = require('./find-open-socket');
+FE_DEV = false;
+FE_DEBUG = true;
+BE_DEV = false;
+
+let findOpenSocket = require('./src/find-open-socket');
 
 let frontendWindow;
 let backendWindow;
@@ -27,7 +30,7 @@ function createFrontendWindow(socketName) {
     webPreferences: {
       nodeIntegration: true,
       webSecurity: false,
-      preload: `${__dirname}/client-preload.js`
+      preload: `${__dirname}/src/client-preload.js`
     }
   });
 
@@ -43,7 +46,7 @@ function createFrontendWindow(socketName) {
     });
   });
 
-  if (!FE_DEV) {
+  if (!FE_DEBUG) {
     frontendWindow.removeMenu();
   } else {
     frontendWindow.webContents.openDevTools();
@@ -130,7 +133,7 @@ app.on('activate', async () => {
 
 // Add extensions: https://github.com/MarshallOfSound/electron-devtools-installer
 app.whenReady().then(() => {
-  if (FE_DEV) {
+  if (FE_DEBUG) {
     const {
       default: installExtension,
       REACT_DEVELOPER_TOOLS,

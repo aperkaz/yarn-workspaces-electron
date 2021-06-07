@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "main": "index.js",
   "license": "MIT",
   "engines": {
     "node": ">=14.15.4"
@@ -23,6 +23,7 @@
     }
   },
   "dependencies": {
+    "@app/shared": "1.0.0",
     "concurrently": "^6.2.0",
     "electron-is-dev": "^1.1.0",
     "node-ipc": "^9.1.1",

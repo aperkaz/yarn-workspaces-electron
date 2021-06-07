@@ -19,7 +19,7 @@
     "shared": "yarn workspace @app/shared",
     "modules:watch": "yarn wsrun --stages --done-criteria=\"Watching for file\" watch",
     "modules:build": "yarn wsrun --stages build",
-    "watch": "yarn --cwd backend watch",
+    "watch": "yarn --cwd backend start",
     "build": "yarn modules:build; yarn --cwd backend dist"
   },
   "description": "Yarn workspaces with electron, for fun and profit",
