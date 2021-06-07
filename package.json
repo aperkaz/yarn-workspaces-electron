@@ -19,8 +19,8 @@
     "shared": "yarn workspace @app/shared",
     "modules:watch": "yarn wsrun --stages --done-criteria=\"Watching for file\" watch",
     "modules:build": "yarn wsrun --stages build",
-    "watch": "yarn --cwd electron watch",
-    "build": "yarn modules:build; yarn --cwd electron dist"
+    "watch": "yarn --cwd backend watch",
+    "build": "yarn modules:build; yarn --cwd backend dist"
   },
   "description": "Yarn workspaces with electron, for fun and profit",
   "repository": "git@github.com:aperkaz/yarn-workspaces-electron.git",

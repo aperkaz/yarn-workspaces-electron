@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
     /* Basic Options */
-    "outDir": "../electron/build-backend",
-    "rootDir": "src",
+    "outDir": "build-backend",
+    "rootDir": "src/backend",
     "allowJs": true
   },
-  "include": ["src"],
+  "include": ["src/backend"],
   "references": [{ "path": "../shared" }]
 }

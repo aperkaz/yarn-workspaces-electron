@@ -1,9 +1,9 @@
 # modules
 frontend/build
 shared/build
-electron/dist
-electron/build-backend
-electron/build-frontend
+backend/dist
+backend/build-backend
+backend/build-frontend
 
 # Logs
 logs

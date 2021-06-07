@@ -1,23 +1,40 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "build/index.js",
-  "types": "build/index.d.ts",
+  "main": "src/index.js",
   "license": "MIT",
   "engines": {
     "node": ">=14.15.4"
   },
   "scripts": {
-    "clean": "rimraf ../electron/build-backend; mkdir ../electron/build-backend",
-    "copy-html": "cp ./src/server-dev.html ../electron/build-backend/server-dev.html",
+    "postinstall": "electron-builder install-app-deps",
+    "start": "electron .",
     "watch": "yarn clean; yarn copy-html; tsc --build --force -w --preserveWatchOutput",
+    "pack": "electron-builder --dir",
+    "dist": "rimraf dist && electron-builder",
+    "clean": "rimraf build-backend; mkdir build-backend",
+    "copy-html": "cp ./src/backend/server-dev.html build-backend/server-dev.html",
     "build": "yarn clean; yarn copy-html; tsc --build --force"
   },
+  "build": {
+    "appId": "electron",
+    "mac": {
+      "category": "your.app.category.type"
+    }
+  },
   "dependencies": {
-    "@app/shared": "1.0.0"
+    "concurrently": "^6.2.0",
+    "electron-is-dev": "^1.1.0",
+    "node-ipc": "^9.1.1",
+    "sharp": "^0.28.3",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@types/node": "^15.6.1",
+    "cpx": "^1.5.0",
+    "electron": "5.0.4",
+    "electron-builder": "^22.10.5",
+    "electron-devtools-installer": "^3.2.0",
     "rimraf": "^3.0.2",
     "typescript": "^4.3.2"
   }
