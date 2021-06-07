@@ -14,7 +14,7 @@
     "build": "yarn clean; yarn copy-html; tsc --build --force"
   },
   "dependencies": {
-    "@test/shared": "1.0.0"
+    "@app/shared": "1.0.0"
   },
   "devDependencies": {
     "@types/node": "^15.6.1",

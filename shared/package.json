@@ -1,10 +1,10 @@
 {
-  "name": "@test/shared",
+  "name": "@app/shared",
   "version": "1.0.0",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
-    "watch": "yarn build --force -w --preserveWatchOutput",
+    "watch": "yarn build -w --preserveWatchOutput",
     "build": "rimraf build; tsc --build --force"
   },
   "license": "MIT",

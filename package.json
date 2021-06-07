@@ -16,7 +16,7 @@
   "scripts": {
     "fe": "yarn workspace frontend",
     "be": "yarn workspace backend",
-    "shared": "yarn workspace @test/shared",
+    "shared": "yarn workspace @app/shared",
     "modules:watch": "yarn wsrun --stages --done-criteria=\"Watching for file\" watch",
     "modules:build": "yarn wsrun --stages build",
     "watch": "yarn --cwd electron watch",
