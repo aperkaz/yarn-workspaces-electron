@@ -1,7 +1,6 @@
 # modules
-backend/dist
 frontend/build
-shared/dist
+shared/build
 electron/dist
 electron/build-backend
 electron/build-frontend
