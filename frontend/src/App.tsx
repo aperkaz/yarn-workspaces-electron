@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from './store/hooks';
 import { ACTIONS } from './store';
 import { send } from './API/helpers';
 
-const Susan = new User('Susan', 31);
+const Susan = new User('Alain', 26);
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -15,7 +15,7 @@ const App = () => {
 
   return (
     <div>
-      <div>{Susan.greet()}</div>
+      <div>Instance from shared module: {Susan.greet()}</div>
       <br />
       <div>Couter: {counter}</div>
       <button
