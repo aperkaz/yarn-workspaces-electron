@@ -4,7 +4,8 @@
   "private": true,
   "workspaces": [
     "backend",
-    "shared"
+    "shared",
+    "frontend"
   ],
   "nohoist": [
     "**/electron",
@@ -15,9 +16,11 @@
   "scripts": {
     "fe": "yarn workspace frontend",
     "be": "yarn workspace backend",
-    "shared": "yarn workspace shared",
-    "watch": "yarn wsrun --stages build",
-    "electron": "yarn workspace electron"
+    "shared": "yarn workspace @test/shared",
+    "modules:watch": "yarn wsrun --stages --done-criteria=\"Watching for file\" watch",
+    "modules:build": "yarn wsrun --stages build",
+    "watch": "yarn --cwd electron watch",
+    "build": "yarn modules:build; yarn --cwd electron dist"
   },
   "description": "Yarn workspaces with electron, for fun and profit",
   "repository": "git@github.com:aperkaz/yarn-workspaces-electron.git",

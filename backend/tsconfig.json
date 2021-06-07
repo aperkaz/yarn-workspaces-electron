@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     /* Basic Options */
-    "outDir": "build",
+    "outDir": "../electron/build-backend",
     "rootDir": "src",
     "allowJs": true
   },

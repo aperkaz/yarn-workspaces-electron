@@ -1,7 +1,7 @@
 let serverHandlers = require("./server-handlers");
 let ipc = require("./server-ipc");
 
-console.log("HELLO FROM workspace");
+console.log("HELLO HOMIE BE");
 
 let isDev, version;
 

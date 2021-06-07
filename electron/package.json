@@ -16,12 +16,9 @@
   },
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
-    "build-frontend:import": "rimraf build-frontend; mkdir build-frontend; cpx \"../frontend/build/**\" build-frontend",
-    "build-backend:import": "rimraf build-backend; mkdir build-backend; cp ../backend/src/server-dev.html ./build-backend/server-dev.html; cpx \"../backend/build/**\" build-backend",
-    "build-backend:watch": "rimraf build-backend; mkdir build-backend; cp ../backend/src/server-dev.html ./build-backend/server-dev.html; cpx \"../backend/build/**\" build-backend -w",
-    "watch": "concurrently \"yarn build-backend:watch\" \"electron . \" ",
-    "pack": "yarn build-backend:import; yarn build-backend:import; electron-builder --dir",
-    "dist": "rimraf ./dist && electron-builder"
+    "watch": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "rimraf dist && electron-builder"
   },
   "build": {
     "appId": "Taggr",

@@ -5,9 +5,11 @@ import { add } from '@test/shared';
 
 import reportWebVitals from './reportWebVitals';
 
+console.log('HELLO FE');
+
 ReactDOM.render(
   <React.StrictMode>
-    <div>MY NAME IS JEFF {add(1, 1)}</div>
+    <div>MY NAME IS SUSAN {add(1, 1)}</div>
   </React.StrictMode>,
   document.getElementById('root')
 );

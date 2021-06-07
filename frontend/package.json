@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "homepage": "./",
   "scripts": {
-    "watch": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "watch": "react-app-rewired start",
+    "build": "rimraf ../electron/build-frontend; mkdir ../electron/build-frontend; react-app-rewired build; cpx \"build/**\" \"../electron/build-frontend\"",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "dependencies": {
@@ -20,7 +20,11 @@
     "typescript": "4.1.5",
     "web-vitals": "^1.0.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "cpx": "^1.5.0",
+    "react-app-rewire-yarn-workspaces": "^1.0.3",
+    "react-app-rewired": "^2.1.8"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",

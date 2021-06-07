@@ -59,8 +59,8 @@ var sharp = function () { return __awaiter(void 0, void 0, void 0, function () {
 }); };
 exports.sharp = sharp;
 /**
- * Hi frommodule
+ * Share module function
  */
-var add = function (a, b) { return a + b + 5; };
+var add = function (a, b) { return a + b * 234; };
 exports.add = add;
 //# sourceMappingURL=index.js.map

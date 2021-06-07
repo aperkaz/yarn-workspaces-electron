@@ -4,8 +4,8 @@
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
-    "watch": "yarn build; tsc -w --preserveWatchOutput",
-    "build": "rimraf build; tsc --build"
+    "watch": "yarn build --force -w --preserveWatchOutput",
+    "build": "rimraf build; tsc --build --force"
   },
   "license": "MIT",
   "engines": {

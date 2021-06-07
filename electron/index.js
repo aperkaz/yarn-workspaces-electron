@@ -3,6 +3,7 @@ let { app, BrowserWindow } = require('electron');
 let { fork } = require('child_process');
 let path = require('path');
 let isDev = require('electron-is-dev');
+// isDev = false;
 
 let findOpenSocket = require('./find-open-socket');
 

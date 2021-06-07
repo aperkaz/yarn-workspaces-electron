@@ -8,8 +8,10 @@
     "node": ">=14.15.4"
   },
   "scripts": {
-    "watch": "yarn build; tsc -w --preserveWatchOutput",
-    "build": "rimraf build; tsc --build"
+    "clean": "rimraf ../electron/build-backend; mkdir ../electron/build-backend",
+    "copy-html": "cp ./src/server-dev.html ../electron/build-backend/server-dev.html",
+    "watch": "yarn clean; yarn copy-html; tsc --build --force -w --preserveWatchOutput",
+    "build": "yarn clean; yarn copy-html; tsc --build --force"
   },
   "dependencies": {
     "@test/shared": "1.0.0"

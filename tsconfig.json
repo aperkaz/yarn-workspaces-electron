@@ -1,19 +1,10 @@
 {
   "compilerOptions": {
-    /* Basic Options */
-    "target": "es5",
     "module": "commonjs",
-    "lib": ["ESNext"],
-
-    /* Strict Type-Checking Options */
-    "strict": true,
-
-    /* Module Resolution Options */
-    "moduleResolution": "node",
+    "target": "es2019",
+    "jsx": "react",
     "esModuleInterop": true,
-
-    /* Advanced Options */
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
-  }
+    "strictNullChecks": true
+  },
+  "includes": ["src"]
 }
