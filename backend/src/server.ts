@@ -1,7 +1,7 @@
 let serverHandlers = require("./server-handlers");
 let ipc = require("./server-ipc");
 
-console.log("HELLO HOMIE BE");
+console.log("HELLO BE");
 
 let isDev, version;
 
@@ -11,6 +11,8 @@ if (process.argv[2] === "--subprocess") {
 
   let socketName = process.argv[4];
   ipc.init(socketName, serverHandlers);
+
+  console.log("node process started");
 } else {
   let { ipcRenderer, remote } = require("electron");
   isDev = true;
@@ -20,9 +22,9 @@ if (process.argv[2] === "--subprocess") {
   ipcRenderer.on("set-socket", (event, { name }) => {
     ipc.init(name, serverHandlers);
   });
-}
 
-console.log(version, isDev);
+  console.log("browser window started ");
+}
 
 (async () => {
   const sharp = require("sharp");
