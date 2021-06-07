@@ -1,18 +1,13 @@
-export const sharp = async () => {
-  const sharp = require("sharp");
+export class User {
+  name: string;
+  age: number;
 
-  const imagePath = `/Users/alain/src/taggr/frontend/src/statics/background.jpg`;
-  const outputPath = `/Users/alain/Downloads/sharp-test.jpg`;
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
 
-  await sharp(imagePath, {
-    failOnError: false,
-  }) // failOnError: true, fixes Samsung corrupted pictures
-    .jpeg({ quality: 80 })
-    .resize(200, 200, { fit: sharp.fit.outside, withoutEnlargement: true })
-    .toFile(outputPath);
-};
-
-/**
- * Share module function
- */
-export const add = (a: number, b: number) => a + b * 234;
+  greet() {
+    return `Shared module, ${this.name}, age ${this.age}`;
+  }
+}

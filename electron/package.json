@@ -21,7 +21,7 @@
     "dist": "rimraf dist && electron-builder"
   },
   "build": {
-    "appId": "Taggr",
+    "appId": "electron",
     "mac": {
       "category": "your.app.category.type"
     }
@@ -38,6 +38,7 @@
     "cpx": "^1.5.0",
     "electron": "^5.0.4",
     "electron-builder": "^22.10.5",
+    "electron-devtools-installer": "^3.2.0",
     "rimraf": "^3.0.2",
     "typescript": "^4.3.2"
   }

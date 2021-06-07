@@ -1,5 +1,6 @@
-import { add, sharp } from "@app/shared";
+import { User } from "@app/shared";
 
-sharp();
+const Jeff = new User("Jeff", 24);
 
-console.log("SUM:  ", add(1, 2));
+console.log("BE");
+console.log(Jeff.greet());

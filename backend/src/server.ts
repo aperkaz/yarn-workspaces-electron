@@ -27,13 +27,15 @@ console.log(version, isDev);
 (async () => {
   const sharp = require("sharp");
 
-  const imagePath = `/Users/alain/src/taggr/frontend/src/statics/background.jpg`;
-  const outputPath = `/Users/alain/Downloads/sharp-test.jpg`;
+  console.log(`Node process running on: ${__dirname}`);
 
-  await sharp(imagePath, {
-    failOnError: false,
-  }) // failOnError: true, fixes Samsung corrupted pictures
-    .jpeg({ quality: 80 })
-    .resize(200, 200, { fit: sharp.fit.outside, withoutEnlargement: true })
-    .toFile(outputPath);
+  // Generates a green image in path
+  await sharp({
+    create: {
+      width: 300,
+      height: 200,
+      channels: 4,
+      background: { r: 0, g: 255, b: 0, alpha: 0.5 },
+    },
+  }).toFile(`${__dirname}/test.jpg`);
 })();

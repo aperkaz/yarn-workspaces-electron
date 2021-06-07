@@ -2,6 +2,11 @@ let electron = require('electron');
 let { app, BrowserWindow } = require('electron');
 let { fork } = require('child_process');
 let path = require('path');
+const {
+  default: installExtension,
+  REACT_DEVELOPER_TOOLS,
+  REDUX_DEVTOOLS
+} = require('electron-devtools-installer');
 let isDev = require('electron-is-dev');
 // isDev = false;
 
@@ -122,4 +127,19 @@ app.on('activate', async () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     initializeApp();
   }
+});
+
+// Add extensions: https://github.com/MarshallOfSound/electron-devtools-installer
+app.whenReady().then(() => {
+  if (isDev) {
+    installExtension([REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS])
+      .then((name) => console.log(`Added Extension:  ${name}`))
+      .catch((err) => console.log('An error occurred: ', err));
+  }
+
+  const { ipcMain } = require('electron');
+  ipcMain.on('restart', () => {
+    app.relaunch();
+    app.exit();
+  });
 });

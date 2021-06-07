@@ -1,15 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-import { add } from '@app/shared';
+import { Provider } from 'react-redux';
 
 import reportWebVitals from './reportWebVitals';
-
-console.log('HELLO FE');
+import store from './store';
+import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <div>MY NAME IS SUSAN {add(1, 1)}</div>
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
