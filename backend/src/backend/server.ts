@@ -1,7 +1,7 @@
 import sharp from 'sharp';
 
-import serverHandlers from './server-handlers';
-import * as ipc from './server-ipc';
+import serverHandlers from './API/handlers';
+import * as ipc from './API/utils';
 
 console.log('HELLO BE');
 

@@ -11,3 +11,5 @@ export class User {
     return `Shared module, ${this.name}, age ${this.age}`;
   }
 }
+
+export * as API from './API';

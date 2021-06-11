@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
 import store from './store';
 import App from './App';
-import { initSocketToServer } from './API/helpers';
+import { initSocketToServer } from './API/utils';
 
 initSocketToServer();
 

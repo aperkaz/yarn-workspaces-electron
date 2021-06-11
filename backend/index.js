@@ -8,7 +8,7 @@ let FE_DEV = isDev;
 let FE_DEBUG = false;
 let BE_DEV = isDev;
 
-FE_DEV = false;
+FE_DEV = true;
 FE_DEBUG = true;
 BE_DEV = false;
 

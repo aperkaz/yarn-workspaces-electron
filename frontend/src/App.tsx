@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import { User } from '@app/shared';
-
+import { User, API } from '@app/shared';
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { ACTIONS } from './store';
-import { send } from './API/helpers';
+import { send } from './API/utils';
 
 const Susan = new User('Alain', 26);
+
+console.log(API);
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -20,8 +21,18 @@ const App = () => {
       <div>Couter: {counter}</div>
       <button
         onClick={async () => {
-          // TODONOW: clean up BE interface
-          console.log(await send('ring-ring', null));
+          console.log(
+            await send({
+              type: API.MessageType.BE_GREET,
+              payload: 'great coder'
+            })
+          );
+          console.log(
+            await send({
+              type: API.MessageType.BE_COUNT,
+              payload: { a: 10, b: 10 }
+            })
+          );
 
           dispatch(ACTIONS.incrementCounter());
         }}

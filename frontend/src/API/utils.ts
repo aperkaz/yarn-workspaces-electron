@@ -1,11 +1,14 @@
-// @ts-nocheck
-// TODONOW: fix types
+import { API } from '@app/shared';
+
+declare const window: any;
+
+// Inpiration: https://github.com/jlongster/electron-with-server-example
 
 // Connection state
 const replyHandlers = new Map();
 const listeners = new Map();
-let messageQueue = [];
-let socketClient = null;
+let messageQueue: any = [];
+let socketClient: any = null;
 
 /**
  * Initialize the socket connection with the backend
@@ -21,8 +24,8 @@ export async function initSocketToServer() {
  * Connect to a given socket
  */
 function connectSocket(name: string, onOpen: () => any) {
-  window.ipcConnect(name, function (client) {
-    client.on('message', (data) => {
+  window.ipcConnect(name, function (client: any) {
+    client.on('message', (data: any) => {
       const msg = JSON.parse(data);
 
       if (msg.type === 'error') {
@@ -56,7 +59,7 @@ function connectSocket(name: string, onOpen: () => any) {
 
       // Send any messages that were queued while closed
       if (messageQueue.length > 0) {
-        messageQueue.forEach((msg) => client.emit('message', msg));
+        messageQueue.forEach((msg: any) => client.emit('message', msg));
         messageQueue = [];
       }
 
@@ -70,17 +73,19 @@ function connectSocket(name: string, onOpen: () => any) {
 }
 
 /**
- * Send payload to server
+ * Send message to backend
  */
-export function send(name: string, args: any) {
-  console.log(`FE sends message: ${name} | ${JSON.stringify(args)}`);
+export function send(message: API.BE_MESSAGES) {
+  const { type, payload } = message;
+
+  console.log(`FE sends message: ${type} | ${JSON.stringify(payload)}`);
   return new Promise((resolve, reject) => {
     let id = window.uuid.v4();
     replyHandlers.set(id, { resolve, reject });
     if (socketClient) {
-      socketClient.emit('message', JSON.stringify({ id, name, args }));
+      socketClient.emit('message', JSON.stringify({ id, message }));
     } else {
-      messageQueue.push(JSON.stringify({ id, name, args }));
+      messageQueue.push(JSON.stringify({ id, message }));
     }
   });
 }
