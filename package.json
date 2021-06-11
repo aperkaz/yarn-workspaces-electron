@@ -2,8 +2,11 @@
   "name": "yarn-workspaces-electron",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=14.15.4"
+  },
   "workspaces": [
-    "backend",
+    "electron-backend",
     "shared",
     "frontend"
   ],
@@ -14,13 +17,10 @@
     "**/jest/**"
   ],
   "scripts": {
-    "fe": "yarn workspace frontend",
-    "be": "yarn workspace backend",
-    "shared": "yarn workspace @app/shared",
     "modules:watch": "yarn wsrun --stages --done-criteria=\"Watching for file\" watch",
     "modules:build": "yarn wsrun --stages build",
-    "watch": "yarn --cwd backend start",
-    "build": "yarn modules:build; yarn --cwd backend dist"
+    "watch": "yarn --cwd electron-backend start",
+    "build": "yarn modules:build; yarn --cwd electron-backend dist"
   },
   "description": "Yarn workspaces with electron, for fun and profit",
   "repository": "git@github.com:aperkaz/yarn-workspaces-electron.git",

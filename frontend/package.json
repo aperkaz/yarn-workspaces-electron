@@ -2,9 +2,12 @@
   "name": "frontend",
   "version": "1.0.0",
   "homepage": "./",
+  "engines": {
+    "node": ">=14.15.4"
+  },
   "scripts": {
     "watch": "react-app-rewired start",
-    "build": "rimraf ../backend/build-frontend; mkdir ../backend/build-frontend; react-app-rewired build; cpx \"build/**\" \"../backend/build-frontend\"",
+    "build": "rimraf ../electron-backend/build-frontend; mkdir ../electron-backend/build-frontend; react-app-rewired build; cpx \"build/**\" \"../electron-backend/build-frontend\"",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",

@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "electron-backend",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -17,7 +17,8 @@
     "build": "yarn clean; yarn copy-html; tsc --build --force"
   },
   "build": {
-    "appId": "electron",
+    "appId": "todo-app",
+    "productName": "todo-app",
     "mac": {
       "category": "your.app.category.type"
     }

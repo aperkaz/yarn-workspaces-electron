@@ -12,9 +12,9 @@ This starter aims to bridge those limitations, focusing on performance and devel
 
 ## High level architecture
 
-As mentioned above, this starter proposes a somewhat 'complex' architecture, best suited for advanced Electron.js apps. Avoid over engineering your solution in the beginning, and consider the switch if you experience performance or developer experience limitations.
+As mentioned above, this starter proposes an advanced architecture, best suited for complex Electron.js apps. Avoid over engineering your solution in the beginning, and consider the switch if you experience performance or developer experience limitations.
 
-The architecture of this starter is divided into three modules: `frontend`, `backend` and `shared`.
+The architecture of this starter is divided into three modules: `frontend`, `electron-backend` and `shared`.
 
 The three modules are built using TypeScript, with optional JS support.
 
@@ -32,16 +32,18 @@ Main features:
 - Full TypeScript support.
 - Develop components in isolation using Storybook.
 - Store the fully-typed app state in Redux.
-- Interact with the backend through async message passing with `node-ipc`.
+- Interact with the electron-backend through async message passing with `node-ipc`.
 - Access to the `shared` module (through [yarn workspaces](https://classic.yarnpkg.com/en/docs/workspaces/)).
 
-### Backend
+### Electron-backend
 
 **Stack**: [TypeScript](https://www.typescriptlang.org/) + [Node.js](https://nodejs.org/en/)
 
-The backend module is responsible for the business logic, and the integrations with external dependencies such as databases and REST APIs.
+The electron-backend module is responsible for the business logic, and the integrations with external dependencies such as databases and REST APIs.
 
 In develper mode, it runs withing an Electron render process (browser window), and in production it runs as a separate node.js process (forked from the electron node.js verion).
+
+This module also contains the electron code required to build and package the starter into a cross-platform
 
 Main features:
 
@@ -57,16 +59,16 @@ Main features:
 
 There are great benefits to having a decoupled architecture. It is often easier to reason about and modify parts of it without impacting the other parts of the system, as long as the interaction contract between the modules it kept (API).
 
-Since the `frontend` and `backend` are separated modules, `shares` enables sharing code between them. This allows to define the frontend and backend async event passing APIs in one place, and evolve the modules separatedly.
+Since the `frontend` and `electron-backend` are separated modules, `shares` enables sharing code between them. This allows to define the frontend and electron-backend async event passing APIs in one place, and evolve the modules separatedly.
 
 Main features:
 
 - Full TypeScript support
-- Enable code sharing between `fronted` and `backend`
+- Enable code sharing between `fronted` and `electron-backend`
 
 ## Communication
 
-The communication between the `frontend` and `backend` modules is done by [node-ipc](https://github.com/RIAEvangelist/node-ipc), following the blueprint proposed in [this great post](https://archive.jlongster.com/secret-of-good-electron-apps).
+The communication between the `frontend` and `electron-backend` modules is done by [node-ipc](https://github.com/RIAEvangelist/node-ipc), following the blueprint proposed in [this great post](https://archive.jlongster.com/secret-of-good-electron-apps).
 
 <!-- TODONOW: add more -->
 
