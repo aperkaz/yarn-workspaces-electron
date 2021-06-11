@@ -4,15 +4,15 @@ let { fork } = require('child_process');
 let path = require('path');
 let isDev = require('electron-is-dev');
 
+let findOpenSocket = require('./src/socket-helpers');
+
 let FE_DEV = isDev;
 let FE_DEBUG = false;
 let BE_DEV = isDev;
 
-FE_DEV = true;
+FE_DEV = false;
 FE_DEBUG = true;
 BE_DEV = false;
-
-let findOpenSocket = require('./src/find-open-socket');
 
 let frontendWindow;
 let backendWindow;
