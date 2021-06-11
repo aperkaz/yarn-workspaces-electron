@@ -2885,6 +2885,13 @@
     "@types/node" "*"
     form-data "^3.0.0"
 
+"@types/node-ipc@^9.1.4":
+  version "9.1.4"
+  resolved "https://registry.yarnpkg.com/@types/node-ipc/-/node-ipc-9.1.4.tgz#826ae1f7165e574f89a80f19f3b1b2097156066e"
+  integrity sha512-YfM5lQRZnpBTTEME9qADNCGXsktNAee48Dl2DQ7Qm0H8AO07yDRqGmACeWI0tFN4L9yQxImw37+Oh3sb65Lblg==
+  dependencies:
+    "@types/node" "*"
+
 "@types/node@*", "@types/node@^15.6.1":
   version "15.12.0"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-15.12.0.tgz#6a459d261450a300e6865faeddb5af01c3389bb3"
@@ -3019,6 +3026,13 @@
   version "7.3.6"
   resolved "https://registry.yarnpkg.com/@types/semver/-/semver-7.3.6.tgz#e9831776f4512a7ba6da53e71c26e5fb67882d63"
   integrity sha512-0caWDWmpCp0uifxFh+FaqK3CuZ2SkRR/ZRxAV5+zNdC3QVUi6wyOJnefhPvtNt8NQWXB5OA93BUvZsXpWat2Xw==
+
+"@types/sharp@^0.28.3":
+  version "0.28.3"
+  resolved "https://registry.yarnpkg.com/@types/sharp/-/sharp-0.28.3.tgz#0e57ede34d3e334632ab7a68a6af070aa0f51ceb"
+  integrity sha512-y3mxUj3jukIWgdu9CrSTSCo5HruTzDxdjn5SqdIEALdTszkcot9r8HX/7q9FMx3YjuXifTD0OI+d4wA6Pogqmw==
+  dependencies:
+    "@types/node" "*"
 
 "@types/source-list-map@*":
   version "0.1.2"

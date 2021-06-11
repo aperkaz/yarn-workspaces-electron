@@ -1,5 +1,7 @@
-let serverHandlers = require('./server-handlers');
-let ipc = require('./server-ipc');
+import sharp from 'sharp';
+
+import serverHandlers from './server-handlers';
+import * as ipc from './server-ipc';
 
 console.log('HELLO BE');
 
@@ -28,9 +30,6 @@ if (process.argv[2] === '--subprocess') {
 
 (async () => {
   // Example of native module. Generates an image.
-
-  const sharp = require('sharp');
-
   console.log(`Node process running on: ${__dirname}`);
 
   // Generates a green image in path

@@ -1,23 +1,24 @@
-const ipcModule = require("node-ipc");
+import ipcModule from 'node-ipc';
 
-function init(socketName, handlers) {
+export function init(socketName, handlers) {
   ipcModule.config.id = socketName;
   ipcModule.config.silent = true;
 
   ipcModule.serve(() => {
-    ipcModule.server.on("message", (data, socket) => {
+    ipcModule.server.on('message', (data, socket) => {
       let msg = JSON.parse(data);
       let { id, name, args } = msg;
 
       console.log(`BE receive: ${name} | ${JSON.stringify(args)}`);
+      console.log(handlers);
 
       if (handlers[name]) {
         handlers[name](args).then(
           (result) => {
             ipcModule.server.emit(
               socket,
-              "message",
-              JSON.stringify({ type: "reply", id, result })
+              'message',
+              JSON.stringify({ type: 'reply', id, result })
             );
           },
           (error) => {
@@ -25,18 +26,18 @@ function init(socketName, handlers) {
             // them, etc
             ipcModule.server.emit(
               socket,
-              "message",
-              JSON.stringify({ type: "error", id })
+              'message',
+              JSON.stringify({ type: 'error', id })
             );
             throw error;
           }
         );
       } else {
-        console.warn("Unknown method: " + name);
+        console.warn('Unknown method: ' + name);
         ipcModule.server.emit(
           socket,
-          "message",
-          JSON.stringify({ type: "reply", id, result: null })
+          'message',
+          JSON.stringify({ type: 'reply', id, result: null })
         );
       }
     });
@@ -45,12 +46,10 @@ function init(socketName, handlers) {
   ipcModule.server.start();
 }
 
-function send(name, args) {
+export function send(name, args) {
   console.log(`BE send: ${name} | ${JSON.stringify(args)}`);
   ipcModule.server.broadcast(
-    "message",
-    JSON.stringify({ type: "push", name, args })
+    'message',
+    JSON.stringify({ type: 'push', name, args })
   );
 }
-
-module.exports = { init, send };

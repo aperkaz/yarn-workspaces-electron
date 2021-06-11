@@ -3,7 +3,8 @@
     /* Basic Options */
     "outDir": "build-backend",
     "rootDir": "src/backend",
-    "allowJs": true
+    "allowJs": true,
+    "esModuleInterop": true
   },
   "include": ["src/backend"],
   "references": [{ "path": "../shared" }]

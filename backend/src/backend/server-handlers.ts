@@ -10,4 +10,4 @@ handlers['ring-ring'] = async () => {
   return Alain.greet();
 };
 
-module.exports = handlers;
+export default handlers;
