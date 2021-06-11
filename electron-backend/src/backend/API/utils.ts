@@ -49,10 +49,12 @@ export function init(socketName: string, handlers: HandlersType) {
   ipcModule.server.start();
 }
 
-export function send(name, args) {
-  console.log(`[BE] send: ${name} | ${JSON.stringify(args)}`);
+export function send(message: API.FE_MESSAGES) {
+  const { type, payload } = message;
+
+  console.log(`[BE] sends message: ${type} | ${JSON.stringify(payload)}`);
   ipcModule.server.broadcast(
     'message',
-    JSON.stringify({ type: 'push', name, args })
+    JSON.stringify({ type: 'push', name: 'message', message })
   );
 }

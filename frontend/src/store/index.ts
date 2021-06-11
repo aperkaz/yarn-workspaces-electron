@@ -1,11 +1,13 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit';
+import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+import { TodoType } from '@app/shared';
 
 interface InitialState {
-  counter: number;
+  todos: TodoType[];
 }
 
 const initialState: InitialState = {
-  counter: 0
+  todos: []
 };
 
 const stateSlice = createSlice({
@@ -13,8 +15,8 @@ const stateSlice = createSlice({
   initialState,
   reducers: {
     resetState: () => initialState,
-    incrementCounter: (state) => {
-      state.counter = state.counter + 1;
+    addTodo: (state, action: PayloadAction<TodoType>) => {
+      state.todos.push(action.payload);
     }
   }
 });

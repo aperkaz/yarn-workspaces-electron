@@ -1,47 +1,59 @@
 import React from 'react';
 
-import { entities, API } from '@app/shared';
+import { API } from '@app/shared';
 
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { ACTIONS } from './store';
 import { send } from './API/utils';
-
-const SharedEntity = new entities.Person('Alain', 26);
+import TodoList from './TodoList';
 
 const App = () => {
   const dispatch = useAppDispatch();
 
-  const counter = useAppSelector((s) => s.counter);
+  const todos = useAppSelector((s) => s.todos);
+
+  const handleAddTodoSync = async () => {
+    const newTodo = {
+      text: `${new Date().toUTCString()} - a sync todo`,
+      isDone: false
+    };
+
+    // send todo to BE
+    const isAdded = await send({
+      type: API.MessageType.BE_ADD_TODO_SYNC,
+      payload: newTodo
+    });
+
+    // add todo to REDUX
+    dispatch(ACTIONS.addTodo(newTodo));
+
+    console.log('Sync todo added: ', isAdded);
+  };
+
+  const handleAddTodoAsync = async () => {
+    const newTodo = {
+      text: `${new Date().toUTCString()} - an async todo`,
+      isDone: false
+    };
+
+    // send todo to BE
+    await send({
+      type: API.MessageType.BE_ADD_TODO_ASYNC,
+      payload: newTodo
+    });
+
+    // The BE will send a message updating the Todos once ready
+  };
 
   return (
     <div>
-      <div>{SharedEntity.toString()}</div>
+      <h1>Todos</h1>
       <br />
-      <div>Send messages to backend (check console for results)</div>
-      <button
-        onClick={async () => {
-          console.log(
-            await send({
-              type: API.MessageType.BE_GREET,
-              payload: 'great coder'
-            })
-          );
-          console.log(
-            await send({
-              type: API.MessageType.BE_SUM,
-              payload: { a: 10, b: 10 }
-            })
-          );
-        }}
-      >
-        async message
-      </button>
-      <br />
-      <br />
-      <div>Redux counter: {counter}</div>
-      <button onClick={async () => dispatch(ACTIONS.incrementCounter())}>
-        increment
-      </button>
+      <TodoList
+        todos={todos}
+        handleAddTodoSync={handleAddTodoSync}
+        handleAddTodoAsync={handleAddTodoAsync}
+      />
     </div>
   );
 };

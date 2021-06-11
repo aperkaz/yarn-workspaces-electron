@@ -1,4 +1,5 @@
 import { API } from '@app/shared';
+import { send } from './utils';
 
 type Handlers = {
   _history: any[];
@@ -11,11 +12,23 @@ const messageHander = async (message: API.BE_MESSAGES) => {
 
   try {
     switch (message.type) {
-      case API.MessageType.BE_GREET:
-        return `Greetings ${message.payload}!`;
-      case API.MessageType.BE_SUM:
-        await new Promise((r) => setTimeout(r, 1000));
-        return message.payload.a + message.payload.b;
+      case API.MessageType.BE_ADD_TODO_SYNC:
+        console.log(`[BE] Added todo sync`);
+        return true;
+      case API.MessageType.BE_ADD_TODO_ASYNC:
+        console.log(`[BE] Added todo async`);
+
+        await new Promise((r) => setTimeout(r, 2000));
+
+        // node-ipc to FE
+        send({
+          type: API.MessageType.FE_ADD_TODO,
+          payload: {
+            isDone: false,
+            text: `${new Date().toUTCString()} - todo from BE`
+          }
+        });
+        return;
     }
   } catch (err) {
     console.error(

@@ -9,7 +9,7 @@
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
     "start": "electron .",
-    "watch": "yarn clean; yarn copy-html; tsc --build --force -w --preserveWatchOutput",
+    "watch": "yarn clean; yarn copy-html; tsc --build --force -w",
     "pack": "electron-builder --dir",
     "dist": "rimraf dist && electron-builder",
     "clean": "rimraf build-backend; mkdir build-backend",

@@ -2,8 +2,6 @@ import { API } from '@app/shared';
 
 declare const window: any;
 
-// Inpiration: https://github.com/jlongster/electron-with-server-example
-
 // Connection state
 const replyHandlers = new Map();
 const listeners = new Map();
@@ -18,6 +16,9 @@ export async function initSocketToServer() {
   connectSocket(socketName, () => {
     console.log('Connected!');
   });
+
+  // register handlers
+  require('./handlers');
 }
 
 /**
@@ -27,6 +28,9 @@ function connectSocket(name: string, onOpen: () => any) {
   window.ipcConnect(name, function (client: any) {
     client.on('message', (data: any) => {
       const msg = JSON.parse(data);
+
+      console.log('MESSAGE IN FE: ', msg.type);
+      console.log(msg);
 
       if (msg.type === 'error') {
         // Up to you whether or not to care about the error
@@ -41,12 +45,13 @@ function connectSocket(name: string, onOpen: () => any) {
           handler.resolve(result);
         }
       } else if (msg.type === 'push') {
-        const { name, args } = msg;
+        const { message } = msg;
 
-        const listens = listeners.get(name);
+        const listens = listeners.get('message');
+        console.log(listens);
         if (listens) {
           listens.forEach((listener: (args: any) => void) => {
-            listener(args);
+            listener(message);
           });
         }
       } else {
@@ -78,7 +83,7 @@ function connectSocket(name: string, onOpen: () => any) {
 export function send(message: API.BE_MESSAGES) {
   const { type, payload } = message;
 
-  console.log(`FE sends message: ${type} | ${JSON.stringify(payload)}`);
+  console.log(`[FE] sends message: ${type} | ${JSON.stringify(payload)}`);
   return new Promise((resolve, reject) => {
     let id = window.uuid.v4();
     replyHandlers.set(id, { resolve, reject });

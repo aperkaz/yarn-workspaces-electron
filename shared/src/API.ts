@@ -1,27 +1,30 @@
+import { TodoType } from './types';
+
 export const CHANNEL = 'taggr-message-passing';
 
 export enum MessageType {
   // BE
-  BE_GREET = 'BE_GREET',
-  BE_SUM = 'BE_SUM',
+  BE_ADD_TODO_SYNC = 'BE_ADD_TODO_SYNC',
+  BE_ADD_TODO_ASYNC = 'BE_ADD_TODO_ASYNC',
   // FE
-  FE_GREET = 'FE_GREET'
+  FE_ADD_TODO = 'FE_ADD_TODO'
 }
 
-interface BE_GREET {
-  type: MessageType.BE_GREET;
-  payload: string;
-}
-interface BE_SUM {
-  type: MessageType;
-  payload: { a: number; b: number };
+interface BE_ADD_TODO_SYNC {
+  type: MessageType.BE_ADD_TODO_SYNC;
+  payload: TodoType;
 }
 
-export type BE_MESSAGES = BE_GREET | BE_SUM;
-
-interface FE_GREET {
-  type: MessageType.FE_GREET;
-  payload: string;
+interface BE_ADD_TODO_ASYNC {
+  type: MessageType.BE_ADD_TODO_ASYNC;
+  payload: TodoType;
 }
 
-export type FE_MESSAGES = FE_GREET;
+export type BE_MESSAGES = BE_ADD_TODO_SYNC | BE_ADD_TODO_ASYNC;
+
+interface FE_ADD_TODO {
+  type: MessageType.FE_ADD_TODO;
+  payload: TodoType;
+}
+
+export type FE_MESSAGES = FE_ADD_TODO;
