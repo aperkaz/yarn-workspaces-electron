@@ -1,13 +1,12 @@
 import React from 'react';
 
-import { User, API } from '@app/shared';
+import { entities, API } from '@app/shared';
+
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { ACTIONS } from './store';
 import { send } from './API/utils';
 
-const Susan = new User('Alain', 26);
-
-console.log(API);
+const SharedEntity = new entities.Person('Alain', 26);
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -16,9 +15,9 @@ const App = () => {
 
   return (
     <div>
-      <div>Instance from shared module: {Susan.greet()}</div>
+      <div>{SharedEntity.toString()}</div>
       <br />
-      <div>Couter: {counter}</div>
+      <div>Send messages to backend (check console for results)</div>
       <button
         onClick={async () => {
           console.log(
@@ -29,14 +28,18 @@ const App = () => {
           );
           console.log(
             await send({
-              type: API.MessageType.BE_COUNT,
+              type: API.MessageType.BE_SUM,
               payload: { a: 10, b: 10 }
             })
           );
-
-          dispatch(ACTIONS.incrementCounter());
         }}
       >
+        async message
+      </button>
+      <br />
+      <br />
+      <div>Redux counter: {counter}</div>
+      <button onClick={async () => dispatch(ACTIONS.incrementCounter())}>
         increment
       </button>
     </div>
