@@ -18,9 +18,8 @@ const App = () => {
       isDone: false
     };
 
-    // send todo to BE
-    const isAdded = await send({
-      type: API.MessageType.BE_ADD_TODO_SYNC,
+    const isAdded = send({
+      type: API.BE.Types.ADD_TODO_SYNC,
       payload: newTodo
     });
 
@@ -36,9 +35,8 @@ const App = () => {
       isDone: false
     };
 
-    // send todo to BE
     await send({
-      type: API.MessageType.BE_ADD_TODO_ASYNC,
+      type: API.BE.Types.ADD_TODO_ASYNC,
       payload: newTodo
     });
 

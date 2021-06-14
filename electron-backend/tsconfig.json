@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    /* Basic Options */
     "outDir": "build-backend",
     "rootDir": "src/backend",
     "allowJs": true,

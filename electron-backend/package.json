@@ -10,6 +10,7 @@
     "postinstall": "electron-builder install-app-deps",
     "start": "electron .",
     "watch": "yarn clean; yarn copy-html; tsc --build --force -w",
+    "test": "jest",
     "pack": "electron-builder --dir",
     "dist": "rimraf dist && electron-builder",
     "clean": "rimraf build-backend; mkdir build-backend",
@@ -32,6 +33,7 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.23",
     "@types/node": "^15.6.1",
     "@types/node-ipc": "^9.1.4",
     "@types/sharp": "^0.28.3",
@@ -39,7 +41,9 @@
     "electron": "5.0.4",
     "electron-builder": "^22.10.5",
     "electron-devtools-installer": "^3.2.0",
+    "jest": "^27.0.4",
     "rimraf": "^3.0.2",
+    "ts-jest": "^27.0.3",
     "typescript": "^4.3.2"
   }
 }

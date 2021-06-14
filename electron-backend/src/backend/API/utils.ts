@@ -13,7 +13,7 @@ export function init(socketName: string, handlers: HandlersType) {
   ipcModule.serve(() => {
     ipcModule.server.on('message', (stringMessage, socket) => {
       let msg = JSON.parse(stringMessage);
-      let { id, message }: { id: string; message: API.BE_MESSAGES } = msg;
+      let { id, message }: { id: string; message: API.BE.Messages } = msg;
 
       if (handlers.message) {
         handlers.message(message).then(
@@ -49,7 +49,9 @@ export function init(socketName: string, handlers: HandlersType) {
   ipcModule.server.start();
 }
 
-export function send(message: API.FE_MESSAGES) {
+export function send<T extends API.FE.Messages>(
+  message: T
+): API.FE.MessageReturnTypes<T> {
   const { type, payload } = message;
 
   console.log(`[BE] sends message: ${type} | ${JSON.stringify(payload)}`);

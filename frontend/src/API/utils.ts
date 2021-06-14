@@ -80,7 +80,9 @@ function connectSocket(name: string, onOpen: () => any) {
 /**
  * Send message to backend
  */
-export function send(message: API.BE_MESSAGES) {
+export function send<T extends API.BE.Messages>(
+  message: T
+): API.BE.MessageReturnTypes<T> {
   const { type, payload } = message;
 
   console.log(`[FE] sends message: ${type} | ${JSON.stringify(payload)}`);
@@ -92,7 +94,7 @@ export function send(message: API.BE_MESSAGES) {
     } else {
       messageQueue.push(JSON.stringify({ id, message }));
     }
-  });
+  }) as API.BE.MessageReturnTypes<T>;
 }
 
 /**

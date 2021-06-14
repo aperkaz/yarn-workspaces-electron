@@ -1,5 +1,4 @@
 {
-  // TODONOW: avoid src in module import
   "compilerOptions": {
     "isolatedModules": false,
     /* Basic Options */
