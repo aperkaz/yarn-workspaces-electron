@@ -8,32 +8,35 @@ In other cases, the app itself needs to contain the business logic and perform e
 
 [Electron.js](https://www.electronjs.org/) is a powerful framework that enables JS developers to create cross-platform desktop apps with the same technology stack used in the web. While the default process model of Electron scales well for UI heavy apps, there are known limitations that may cause laggy UIs and poor developer experience.
 
-This starter aims to bridge those limitations, focusing on performance and developer experience. This is exactly how my app [Taggr](https://taggr.ai/) is architected.
+This starter aims to bridge those limitations, focusing on performance and developer experience. It combines the latest web libraries with electron. This is exactly how my app [Taggr](https://taggr.ai/) is architected.
 
 ## High level architecture
 
 As mentioned above, this starter proposes an advanced architecture, best suited for complex Electron.js apps. Avoid over engineering your solution in the beginning, and consider the switch if you experience performance or developer experience limitations.
 
-The architecture of this starter is divided into three modules: `frontend`, `electron-backend` and `shared`.
+The architecture of this starter is divided into three modules: `frontend`, `electron-backend` and `shared`. Below is the bird-eye view of the architecture, with color-coded modules:
 
-The three modules are built using TypeScript, with optional JS support.
+![Production architecture](./img-arch-prod.png)
 
-<!-- TODONOW: add graph -->
+The code sharing between modules (the `shared` module) is managed with [yarn workspaces](https://classic.yarnpkg.com/en/docs/workspaces/).
 
 ### Frontend
 
 **Stack**: [TypeScript](https://www.typescriptlang.org/) + [React (CRA)](https://github.com/facebook/create-react-app) + [Redux](https://redux-toolkit.js.org/) + [Storybook](https://storybook.js.org/)
 
-The frontend module is responsible of all things UI.
-No business logic should live in this module.
+The frontend module is responsible of all things UI, no business logic should live in this module.
 
-Main features:
+During **development**, the frontend is served live from the webpack dev-server (from [http://localhost:3000](http://localhost:3000)).
+In **production**, the frontend statics are [build](https://create-react-app.dev/docs/deployment/) and copied into the build.
+
+#### Main features
 
 - Full TypeScript support.
 - Develop components in isolation using Storybook.
 - Store the fully-typed app state in Redux.
 - Interact with the electron-backend through async message passing with `node-ipc`.
 - Access to the `shared` module (through [yarn workspaces](https://classic.yarnpkg.com/en/docs/workspaces/)).
+- Tests with [jest](https://jestjs.io/).
 
 ### Electron-backend
 
@@ -41,17 +44,23 @@ Main features:
 
 The electron-backend module is responsible for the business logic, and the integrations with external dependencies such as databases and REST APIs.
 
-In develper mode, it runs withing an Electron render process (browser window), and in production it runs as a separate node.js process (forked from the electron node.js verion).
+It also contains the electron code required to build and package the app into a cross-platform executable.
 
-This module also contains the electron code required to build and package the starter into a cross-platform
+In **development**, the backend code it runs withing an Electron render process (browser window).
+In **production**, the backend code it runs as a separate node.js process (forked from the electron node.js verion), served from compiled TS.
 
-Main features:
+The schema of development:
+
+![Development architecture](./img-arch-dev.png)
+
+#### Main features
 
 - Full TypeScript support.
 - Perform costly CPU and GPU operations without impacting the UI.
 - Support for [native modules](https://www.electronjs.org/docs/tutorial/using-native-node-modules).
 - Interact with the frontend through async message passing with `node-ipc`.
 - Access to the `shared` module (through [yarn workspaces](https://classic.yarnpkg.com/en/docs/workspaces/)).
+- Tests with [jest](https://jestjs.io/)
 
 ### Shared
 
@@ -70,7 +79,7 @@ Main features:
 
 The communication between the `frontend` and `electron-backend` modules is done by [node-ipc](https://github.com/RIAEvangelist/node-ipc), following the blueprint proposed in [this great post](https://archive.jlongster.com/secret-of-good-electron-apps).
 
-<!-- TODONOW: add more -->
+It uses asynchronous message passing to transfer the events, and the communication layer is typed in the `shared` module. By doing so, both the `frontend` and `electron-backend`
 
 ## Getting up and running
 
