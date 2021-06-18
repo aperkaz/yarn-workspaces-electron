@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "homepage": "./",
   "engines": {
-    "node": ">=14.15.4"
+    "node": "14.17.0"
   },
   "resolutions": {
     "babel-loader": "8.1.0"
