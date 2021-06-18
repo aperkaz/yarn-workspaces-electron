@@ -5,6 +5,9 @@
   "engines": {
     "node": ">=14.15.4"
   },
+  "resolutions": {
+    "babel-loader": "8.1.0"
+  },
   "scripts": {
     "watch": "react-app-rewired start",
     "build": "rimraf ../electron-backend/build-frontend; mkdir ../electron-backend/build-frontend; react-app-rewired build; cpx \"build/**\" \"../electron-backend/build-frontend\"",
