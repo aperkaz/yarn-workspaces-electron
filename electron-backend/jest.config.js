@@ -1,5 +1,6 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  resetMocks: true
+  resetMocks: true,
+  testMatch: ['!**/build-backend/**', '**/src/**/*.(spec).ts']
 };
