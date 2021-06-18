@@ -2,17 +2,12 @@ let electron = require('electron');
 let { app, BrowserWindow } = require('electron');
 let { fork } = require('child_process');
 let path = require('path');
-let isDev = require('electron-is-dev');
 
 let findOpenSocket = require('./src/socket-helpers');
 
-let FE_DEV = isDev; 
-let FE_DEBUG = false;
-let BE_DEV = isDev;
-
-FE_DEV = true;
-FE_DEBUG = true;
-BE_DEV = true;
+let FE_DEV = true;
+let FE_DEBUG = true;
+let BE_DEV = true;
 
 let frontendWindow;
 let backendWindow;
