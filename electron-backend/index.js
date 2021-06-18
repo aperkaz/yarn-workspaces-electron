@@ -6,7 +6,7 @@ let isDev = require('electron-is-dev');
 
 let findOpenSocket = require('./src/socket-helpers');
 
-let FE_DEV = isDev;
+let FE_DEV = isDev; 
 let FE_DEBUG = false;
 let BE_DEV = isDev;
 
