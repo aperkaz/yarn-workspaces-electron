@@ -19,10 +19,7 @@
   },
   "build": {
     "appId": "todo-app",
-    "productName": "todo-app",
-    "mac": {
-      "category": "your.app.category.type"
-    }
+    "productName": "todo-app"
   },
   "dependencies": {
     "@app/shared": "1.0.0",
