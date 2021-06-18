@@ -88,3 +88,9 @@ It uses asynchronous message passing to transfer the events, and the communicati
 The high level app architecture:
 
 <!-- TODONOW: add architecture -->
+
+<!-- TODONOW: finish documentation -->
+
+<!-- TODONOW: add CI -->
+
+<!-- TODONOW: wrap up -->

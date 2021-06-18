@@ -22,6 +22,9 @@ export namespace BE {
 
   export type Messages = ADD_TODO_SYNC | ADD_TODO_ASYNC;
 
+  /**
+   * Defines the response types for each message type
+   */
   export type MessageReturnTypes<T> = T extends ADD_TODO_SYNC
     ? boolean
     : T extends ADD_TODO_ASYNC
@@ -52,6 +55,9 @@ export namespace FE {
     ADD_TODO: (message: ADD_TODO) => void;
   };
 
+  /**
+   * Defines the response types for each message type
+   */
   export type MessageReturnTypes<T> = void;
 
   export type MessageHandlers = {

@@ -1,0 +1,24 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: "npm"
+    directory: "/electron-backend"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+
+  - package-ecosystem: "npm"
+    directory: "/shared"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
