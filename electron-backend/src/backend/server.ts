@@ -5,20 +5,18 @@ import * as ipc from './API/utils';
 
 console.log('HELLO BE');
 
-let isDev, version;
+let isDev;
 
 if (process.argv[2] === '--subprocess') {
   isDev = false;
-  version = process.argv[3];
 
   let socketName = process.argv[4];
   ipc.init(socketName, serverHandlers);
 
   console.log('node process started');
 } else {
-  let { ipcRenderer, remote } = require('electron');
+  let { ipcRenderer } = require('electron');
   isDev = true;
-  version = remote.app.getVersion();
 
   // @ts-ignore
   ipcRenderer.on('set-socket', (event, { name }) => {
