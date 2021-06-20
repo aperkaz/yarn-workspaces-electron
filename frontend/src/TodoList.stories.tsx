@@ -8,7 +8,8 @@ export default {
   component: TodoList,
   argTypes: {
     handleAddTodoSync: { action: 'handleAddTodoSync' },
-    handleAddTodoAsync: { action: 'handleAddTodoAsync' }
+    handleAddTodoAsync: { action: 'handleAddTodoAsync' },
+    handleReset: { action: 'handleReset' }
   }
 } as Meta;
 

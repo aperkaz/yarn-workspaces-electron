@@ -49,9 +49,10 @@ export function init(socketName: string, handlers: HandlersType) {
   ipcModule.server.start();
 }
 
-export function send<T extends API.FE.Messages>(
-  message: T
-): API.FE.MessageReturnTypes<T> {
+/**
+ * Send message to FE through node-ipc
+ */
+export function send<T extends API.FE.Messages>(message: T) {
   const { type, payload } = message;
 
   console.log(`[BE] sends message: ${type} | ${JSON.stringify(payload)}`);

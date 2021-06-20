@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { API } from '@app/shared';
-
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { ACTIONS } from './store';
 import { send } from './API/utils';
@@ -13,44 +11,56 @@ const App = () => {
   const todos = useAppSelector((s) => s.todos);
 
   const handleAddTodoSync = async () => {
-    const newTodo = {
-      text: `${new Date().toUTCString()} - a sync todo`,
+    const syncTodo = {
+      text: `A sync todo`,
       isDone: false
     };
 
+    // BE will update the redux store
     const isAdded = send({
-      type: API.BE.Types.ADD_TODO_SYNC,
-      payload: newTodo
+      type: 'ADD_TODO_SYNC',
+      payload: syncTodo
     });
-
-    // add todo to REDUX
-    dispatch(ACTIONS.addTodo(newTodo));
 
     console.log('Sync todo added: ', isAdded);
   };
 
   const handleAddTodoAsync = async () => {
     const newTodo = {
-      text: `${new Date().toUTCString()} - an async todo`,
+      text: `An async todo`,
       isDone: false
     };
 
-    await send({
-      type: API.BE.Types.ADD_TODO_ASYNC,
+    // The BE will udpate the redux store
+    const isAdded = await send({
+      type: 'ADD_TODO_ASYNC',
       payload: newTodo
     });
 
-    // The BE will send a message updating the Todos once ready
+    console.log('Async todo added: ', isAdded);
+  };
+
+  const handleReset = async () => {
+    dispatch(ACTIONS.resetState());
   };
 
   return (
-    <div>
-      <h1>Todos</h1>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingTop: '5rem'
+      }}
+    >
+      <h1 style={{ marginTop: 0 }}>Todos</h1>
       <br />
       <TodoList
         todos={todos}
         handleAddTodoSync={handleAddTodoSync}
         handleAddTodoAsync={handleAddTodoAsync}
+        handleReset={handleReset}
       />
     </div>
   );

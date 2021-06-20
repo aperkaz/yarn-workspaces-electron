@@ -78,14 +78,15 @@ function connectSocket(name: string, onOpen: () => any) {
 }
 
 /**
- * Send message to backend
+ * Send message to BE through node-ipc
  */
 export function send<T extends API.BE.Messages>(
   message: T
-): API.BE.MessageReturnTypes<T> {
+): ReturnType<API.BE.MessageHandler[T['type']]> {
   const { type, payload } = message;
 
   console.log(`[FE] sends message: ${type} | ${JSON.stringify(payload)}`);
+
   return new Promise((resolve, reject) => {
     let id = window.uuid.v4();
     replyHandlers.set(id, { resolve, reject });
@@ -94,7 +95,7 @@ export function send<T extends API.BE.Messages>(
     } else {
       messageQueue.push(JSON.stringify({ id, message }));
     }
-  }) as API.BE.MessageReturnTypes<T>;
+  }) as any;
 }
 
 /**
