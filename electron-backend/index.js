@@ -2,12 +2,13 @@ let electron = require('electron');
 let { app, BrowserWindow } = require('electron');
 let { fork } = require('child_process');
 let path = require('path');
+const isDev = require('electron-is-dev');
 
 let findOpenSocket = require('./src/socket-helpers');
 
-let FE_DEV = true;
-let FE_DEBUG = true;
-let BE_DEV = true;
+let FE_FROM_STATICS = isDev ? false : true;
+let FE_ENABLE_DEV_TOOLS = isDev ? true : false;
+let BE_AS_SEPARATE_PROCESS = isDev ? false : true;
 
 let frontendWindow;
 let backendWindow;
@@ -30,7 +31,7 @@ function createFrontendWindow(socketName) {
   });
 
   frontendWindow.loadURL(
-    FE_DEV
+    FE_FROM_STATICS
       ? 'http://localhost:3000'
       : `file://${path.join(__dirname, FE_BUILD_DIR, 'index.html')}`
   );
@@ -41,10 +42,10 @@ function createFrontendWindow(socketName) {
     });
   });
 
-  if (!FE_DEBUG) {
-    frontendWindow.removeMenu();
-  } else {
+  if (FE_ENABLE_DEV_TOOLS) {
     frontendWindow.webContents.openDevTools();
+  } else {
+    frontendWindow.removeMenu();
   }
 }
 
@@ -88,11 +89,10 @@ const initializeApp = async () => {
 
   createFrontendWindow(serverSocket);
 
-  if (BE_DEV) {
-    createBackendWindow(serverSocket);
-    // createBackgroundProcess(serverSocket);
-  } else {
+  if (BE_AS_SEPARATE_PROCESS) {
     createBackendProcess(serverSocket);
+  } else {
+    createBackendWindow(serverSocket);
   }
 };
 
@@ -128,7 +128,7 @@ app.on('activate', async () => {
 
 // Add extensions: https://github.com/MarshallOfSound/electron-devtools-installer
 app.whenReady().then(() => {
-  if (FE_DEBUG) {
+  if (FE_ENABLE_DEV_TOOLS) {
     const {
       default: installExtension,
       REACT_DEVELOPER_TOOLS,

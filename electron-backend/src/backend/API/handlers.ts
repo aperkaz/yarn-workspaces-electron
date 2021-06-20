@@ -1,23 +1,33 @@
 import { API } from '@app/shared';
 import { send } from './utils';
 
-const router: API.BE.MessageHandlers = {
-  ADD_TODO_SYNC: () => {
+const router: API.BE.MessageHandler = {
+  ADD_TODO_SYNC: (message) => {
     console.log(`[BE] Added todo sync`);
-    return true;
-  },
-  ADD_TODO_ASYNC: async () => {
-    console.log(`[BE] Added todo async`);
-    await new Promise((r) => setTimeout(r, 1000));
 
-    // node-ipc to FE
     send({
-      type: API.FE.Types.ADD_TODO,
+      type: 'ADD_TODO',
       payload: {
-        isDone: false,
-        text: `${new Date().toUTCString()} - todo from BE`
+        isDone: message.payload.isDone,
+        text: `[BE sync] - ${message.payload.text}`
       }
     });
+
+    return true;
+  },
+  ADD_TODO_ASYNC: async (message) => {
+    console.log(`[BE] Added todo async`);
+    await new Promise((r) => setTimeout(r, 2000));
+
+    send({
+      type: 'ADD_TODO',
+      payload: {
+        isDone: message.payload.isDone,
+        text: `[BE async] - ${message.payload.text}`
+      }
+    });
+
+    return true;
   }
 };
 
@@ -29,7 +39,8 @@ async function messageHander(message: API.BE.Messages) {
     return Promise.reject(`[BE] unhanded message type: ${message.type}`);
   }
 
-  return await router[message.type]();
+  // @ts-ignore
+  return await router[message.type](message);
 }
 
 export default {

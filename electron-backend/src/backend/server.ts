@@ -3,8 +3,6 @@ import sharp from 'sharp';
 import serverHandlers from './API/handlers';
 import * as ipc from './API/utils';
 
-console.log('HELLO BE');
-
 let isDev;
 
 if (process.argv[2] === '--subprocess') {
@@ -38,5 +36,7 @@ if (process.argv[2] === '--subprocess') {
       channels: 4,
       background: { r: 0, g: 255, b: 0, alpha: 0.5 }
     }
-  }).toFile(`${__dirname}/test.jpg`);
+  })
+    .toFile(`${__dirname}/test.jpg`)
+    .catch();
 })();

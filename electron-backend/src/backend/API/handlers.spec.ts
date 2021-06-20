@@ -1,4 +1,3 @@
-import { API } from '@app/shared';
 import handlers from './handlers';
 
 jest.mock('./utils', () => ({
@@ -10,8 +9,8 @@ describe('Message handlers', () => {
   it('should return true when processing ADD_TODO_SYNC message', async () => {
     await expect(
       handlers.message({
-        type: API.BE.Types.ADD_TODO_SYNC,
-        payload: null
+        type: 'ADD_TODO_SYNC',
+        payload: { isDone: false, text: 'add todo sync' }
       })
     ).resolves.toBe(true);
   });
@@ -20,13 +19,13 @@ describe('Message handlers', () => {
     jest.useFakeTimers();
 
     const handlePromise = handlers.message({
-      type: API.BE.Types.ADD_TODO_ASYNC,
-      payload: { text: 'Test todo', isDone: true }
+      type: 'ADD_TODO_ASYNC',
+      payload: { isDone: false, text: 'add todo async' }
     });
 
     jest.runAllTimers(); // speed up timers
 
-    await expect(handlePromise).resolves.toEqual(undefined);
+    await expect(handlePromise).resolves.toBe(true);
     expect(send).toHaveBeenCalledTimes(1);
   });
 
@@ -34,7 +33,7 @@ describe('Message handlers', () => {
     await expect(
       handlers.message({
         type: 'unhandled message' as any,
-        payload: { text: 'Test todo', isDone: true }
+        payload: false as any
       })
     ).rejects.toBe('[BE] unhanded message type: unhandled message');
   });

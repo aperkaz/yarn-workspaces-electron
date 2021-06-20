@@ -29,9 +29,6 @@ function connectSocket(name: string, onOpen: () => any) {
     client.on('message', (data: any) => {
       const msg = JSON.parse(data);
 
-      console.log('MESSAGE IN FE: ', msg.type);
-      console.log(msg);
-
       if (msg.type === 'error') {
         // Up to you whether or not to care about the error
         const { id } = msg;
@@ -48,7 +45,6 @@ function connectSocket(name: string, onOpen: () => any) {
         const { message } = msg;
 
         const listens = listeners.get('message');
-        console.log(listens);
         if (listens) {
           listens.forEach((listener: (args: any) => void) => {
             listener(message);
@@ -78,14 +74,15 @@ function connectSocket(name: string, onOpen: () => any) {
 }
 
 /**
- * Send message to backend
+ * Send message to BE through node-ipc
  */
 export function send<T extends API.BE.Messages>(
   message: T
-): API.BE.MessageReturnTypes<T> {
+): ReturnType<API.BE.MessageHandler[T['type']]> {
   const { type, payload } = message;
 
   console.log(`[FE] sends message: ${type} | ${JSON.stringify(payload)}`);
+
   return new Promise((resolve, reject) => {
     let id = window.uuid.v4();
     replyHandlers.set(id, { resolve, reject });
@@ -94,7 +91,7 @@ export function send<T extends API.BE.Messages>(
     } else {
       messageQueue.push(JSON.stringify({ id, message }));
     }
-  }) as API.BE.MessageReturnTypes<T>;
+  }) as any;
 }
 
 /**
