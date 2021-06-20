@@ -32,8 +32,8 @@ function createFrontendWindow(socketName) {
 
   frontendWindow.loadURL(
     FE_FROM_STATICS
-      ? 'http://localhost:3000'
-      : `file://${path.join(__dirname, FE_BUILD_DIR, 'index.html')}`
+      ? `file://${path.join(__dirname, FE_BUILD_DIR, 'index.html')}`
+      : 'http://localhost:3000'
   );
 
   frontendWindow.webContents.on('did-finish-load', () => {
