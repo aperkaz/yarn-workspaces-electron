@@ -29,9 +29,6 @@ function connectSocket(name: string, onOpen: () => any) {
     client.on('message', (data: any) => {
       const msg = JSON.parse(data);
 
-      console.log('MESSAGE IN FE: ', msg.type);
-      console.log(msg);
-
       if (msg.type === 'error') {
         // Up to you whether or not to care about the error
         const { id } = msg;
@@ -48,7 +45,6 @@ function connectSocket(name: string, onOpen: () => any) {
         const { message } = msg;
 
         const listens = listeners.get('message');
-        console.log(listens);
         if (listens) {
           listens.forEach((listener: (args: any) => void) => {
             listener(message);

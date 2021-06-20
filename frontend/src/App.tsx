@@ -17,7 +17,7 @@ const App = () => {
     };
 
     // BE will update the redux store
-    const isAdded = send({
+    const isAdded = await send({
       type: 'ADD_TODO_SYNC',
       payload: syncTodo
     });
