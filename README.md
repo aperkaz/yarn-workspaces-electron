@@ -8,15 +8,15 @@ In other cases, the app itself needs to contain the business logic and perform e
 
 [Electron.js](https://www.electronjs.org/) is a powerful framework that enables JS developers to create cross-platform desktop apps with the same technology stack used in the web. While the default process model of Electron scales well for UI heavy apps, there are limitations that may cause laggy UIs and poor developer experience.
 
-This starter aims to bridge those limitations, focusing on performance and developer experience. It combines the latest web libraries with electron. This is exactly how my app [Taggr](https://taggr.ai/) is architected.
+This starter aims to bridge those limitations, focusing on performance and developer experience. It combines the latest web libraries with Electron.
+
+This is exactly how my app [Taggr](https://taggr.ai/) is architected.
 
 ## High-level architecture
 
 As mentioned above, this starter proposes an advanced architecture, best suited for complex Electron.js apps. Avoid over engineering your solution in the beginning, and consider the switch if you experience performance or developer experience limitations.
 
-The architecture of this starter is divided into three modules: `frontend`, `electron-backend` and `shared`. Below is the bird-eye view of the architecture, with color-coded modules:
-
-![Production architecture](./img-arch-prod.png)
+The architecture of this starter is divided into three modules: `frontend`, `electron-backend` and `shared`.
 
 The code sharing between modules (the `shared` module) is managed with [yarn workspaces](https://classic.yarnpkg.com/en/docs/workspaces/).
 
@@ -79,11 +79,11 @@ Since the `frontend` and `electron-backend` are separated modules, `shared` enab
 
 The communication between the `frontend` and `electron-backend` modules is done by [node-ipc](https://github.com/RIAEvangelist/node-ipc), following the blueprint proposed in [this great post](https://archive.jlongster.com/secret-of-good-electron-apps).
 
-It uses asynchronous message passing to transfer the events, and the communication layer is typed in the `shared` module. By doing so, both the `frontend` and `electron-backend` are decoupled, and the communication layer has full type safety.
+It uses asynchronous message passing to transfer the events, and the communication layer is typed in the `shared` module. By doing so, both the `frontend` and `electron-backend` are decoupled, and the communication layer offers full type safety.
 
-The `frontend` can trigger code in the `backend` by passing messages, and wait for an answer synchronously or asynchronously. However, in some cases, the operations that `backend` should do may take significant time and resources.
+The `frontend` can trigger code in the `backend` by passing messages, and wait for an answer asynchronously. However, in some cases, the operations that `backend` should do may take significant time and resources.
 
-Thats why the `frontend` also exposes a series of events, so that the `backend` can modify the state of the `frontend` (redux store) when needed.
+Thats why the `frontend` also exposes event handlers, so that the `backend` can modify the state of the `frontend` (redux store) when needed.
 
 ## Getting up and running
 
