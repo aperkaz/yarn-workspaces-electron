@@ -3,9 +3,6 @@ import sharp from 'sharp';
 import { API } from '@app/shared';
 import { send } from './utils';
 
-const os = require('os');
-sharp.concurrency(os.cpus() - 2);
-
 /**
  * Example of native module. Generates an image.
  */
@@ -14,8 +11,8 @@ const processImage = async () => {
 
   await sharp({
     create: {
-      width: 8000,
-      height: 8000,
+      width: 3000,
+      height: 3000,
       channels: 4,
       background: { r: 0, g: 255, b: 0, alpha: 0.5 }
     }

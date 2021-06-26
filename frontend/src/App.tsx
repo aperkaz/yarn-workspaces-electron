@@ -21,11 +21,9 @@ const App = () => {
 
   const handleProcessImageBatch = async () => {
     // The BE will udpate the redux store
-    const isAdded = await send({
+    send({
       type: 'PROCESS_IMAGE_BATCH'
     });
-
-    console.log('Image processed: ', isAdded);
   };
 
   const handleReset = async () => {
