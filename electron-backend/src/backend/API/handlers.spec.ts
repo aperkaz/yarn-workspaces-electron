@@ -6,21 +6,19 @@ jest.mock('./utils', () => ({
 import { send } from './utils';
 
 describe('Message handlers', () => {
-  it('should return true when processing ADD_TODO_SYNC message', async () => {
+  it('should return true when processing PROCESS_IMAGE_ASYNC message', async () => {
     await expect(
       handlers.message({
-        type: 'ADD_TODO_SYNC',
-        payload: { isDone: false, text: 'add todo sync' }
+        type: 'PROCESS_IMAGE_ASYNC'
       })
     ).resolves.toBe(true);
   });
 
-  it('should process ADD_TODO_ASYNC message', async () => {
+  it('should process PROCESS_IMAGE_BATCH message', async () => {
     jest.useFakeTimers();
 
     const handlePromise = handlers.message({
-      type: 'ADD_TODO_ASYNC',
-      payload: { isDone: false, text: 'add todo async' }
+      type: 'PROCESS_IMAGE_BATCH'
     });
 
     jest.runAllTimers(); // speed up timers
@@ -32,8 +30,7 @@ describe('Message handlers', () => {
   it('should reject when there is not handler registered', async () => {
     await expect(
       handlers.message({
-        type: 'unhandled message' as any,
-        payload: false as any
+        type: 'unhandled message' as any
       })
     ).rejects.toBe('[BE] unhanded message type: unhandled message');
   });

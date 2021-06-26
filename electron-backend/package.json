@@ -18,8 +18,8 @@
     "build": "yarn clean; yarn copy-html; tsc --build --force"
   },
   "build": {
-    "appId": "todo-app",
-    "productName": "todo-app"
+    "appId": "image-app",
+    "productName": "image-app"
   },
   "dependencies": {
     "@app/shared": "1.0.0",

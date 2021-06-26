@@ -79,9 +79,9 @@ function connectSocket(name: string, onOpen: () => any) {
 export function send<T extends API.BE.Messages>(
   message: T
 ): ReturnType<API.BE.MessageHandler[T['type']]> {
-  const { type, payload } = message;
+  const { type } = message;
 
-  console.log(`[FE] sends message: ${type} | ${JSON.stringify(payload)}`);
+  console.log(`[FE] sends message: ${type}`);
 
   return new Promise((resolve, reject) => {
     let id = window.uuid.v4();

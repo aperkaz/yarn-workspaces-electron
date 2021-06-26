@@ -1,5 +1,3 @@
-import sharp from 'sharp';
-
 import serverHandlers from './API/handlers';
 import * as ipc from './API/utils';
 
@@ -23,20 +21,3 @@ if (process.argv[2] === '--subprocess') {
 
   console.log('browser window started ');
 }
-
-(async () => {
-  // Example of native module. Generates an image.
-  console.log(`Node process running on: ${__dirname}`);
-
-  // Generates a green image in path
-  await sharp({
-    create: {
-      width: 300,
-      height: 200,
-      channels: 4,
-      background: { r: 0, g: 255, b: 0, alpha: 0.5 }
-    }
-  })
-    .toFile(`${__dirname}/test.jpg`)
-    .catch();
-})();

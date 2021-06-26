@@ -3,41 +3,29 @@ import React from 'react';
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { ACTIONS } from './store';
 import { send } from './API/utils';
-import TodoList from './TodoList';
+import NotificationList from './NotificationList';
 
 const App = () => {
   const dispatch = useAppDispatch();
 
-  const todos = useAppSelector((s) => s.todos);
+  const notifications = useAppSelector((s) => s.notifications);
 
-  const handleAddTodoSync = async () => {
-    const syncTodo = {
-      text: `A sync todo`,
-      isDone: false
-    };
-
-    // BE will update the redux store
-    const isAdded = await send({
-      type: 'ADD_TODO_SYNC',
-      payload: syncTodo
+  const handleProcessImageAsync = async () => {
+    // The BE will udpate the redux store with notifications
+    const isImageProcessed = await send({
+      type: 'PROCESS_IMAGE_ASYNC'
     });
 
-    console.log('Sync todo added: ', isAdded);
+    console.log('Image processed: ', isImageProcessed);
   };
 
-  const handleAddTodoAsync = async () => {
-    const newTodo = {
-      text: `An async todo`,
-      isDone: false
-    };
-
+  const handleProcessImageBatch = async () => {
     // The BE will udpate the redux store
     const isAdded = await send({
-      type: 'ADD_TODO_ASYNC',
-      payload: newTodo
+      type: 'PROCESS_IMAGE_BATCH'
     });
 
-    console.log('Async todo added: ', isAdded);
+    console.log('Image processed: ', isAdded);
   };
 
   const handleReset = async () => {
@@ -54,12 +42,20 @@ const App = () => {
         paddingTop: '5rem'
       }}
     >
-      <h1 style={{ marginTop: 0 }}>Todos</h1>
+      <h1 style={{ marginTop: 0 }}>Offline Image Processsing App</h1>
       <br />
-      <TodoList
-        todos={todos}
-        handleAddTodoSync={handleAddTodoSync}
-        handleAddTodoAsync={handleAddTodoAsync}
+      <img
+        src="https://upload.wikimedia.org/wikipedia/en/7/77/EricCartman.png"
+        className="rotate linear infinite"
+        alt="img"
+        width="80"
+        height="80"
+      />
+      <br />
+      <NotificationList
+        notifications={notifications}
+        handleProcessImageAsync={handleProcessImageAsync}
+        handleProcessImageBatch={handleProcessImageBatch}
         handleReset={handleReset}
       />
     </div>

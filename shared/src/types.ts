@@ -1,4 +1,3 @@
-export type TodoType = {
-  isDone: boolean;
+export type NotificationType = {
   text: string;
 };

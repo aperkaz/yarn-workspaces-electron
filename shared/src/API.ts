@@ -1,4 +1,4 @@
-import { TodoType } from './types';
+import { NotificationType } from './types';
 
 export const CHANNEL = 'taggr-message-passing';
 
@@ -11,25 +11,21 @@ export namespace BE {
   export type Types = keyof MessageHandler;
 
   export type MessageHandler = {
-    ADD_TODO_SYNC: ({
-      type,
-      payload
+    PROCESS_IMAGE_ASYNC: ({
+      type
     }: {
-      type: 'ADD_TODO_SYNC';
-      payload: TodoType;
-    }) => boolean;
-    ADD_TODO_ASYNC: ({
-      type,
-      payload
+      type: 'PROCESS_IMAGE_ASYNC';
+    }) => Promise<boolean>;
+    PROCESS_IMAGE_BATCH: ({
+      type
     }: {
-      type: 'ADD_TODO_ASYNC';
-      payload: TodoType;
+      type: 'PROCESS_IMAGE_BATCH';
     }) => Promise<boolean>;
   };
 
   export type Messages =
-    | Parameters<MessageHandler['ADD_TODO_SYNC']>[0]
-    | Parameters<MessageHandler['ADD_TODO_ASYNC']>[0];
+    | Parameters<MessageHandler['PROCESS_IMAGE_ASYNC']>[0]
+    | Parameters<MessageHandler['PROCESS_IMAGE_BATCH']>[0];
 }
 
 // FE
@@ -38,14 +34,14 @@ export namespace FE {
   export type Types = keyof MessageHandler;
 
   export type MessageHandler = {
-    ADD_TODO: ({
+    ADD_NOTIFICATION: ({
       type,
       payload
     }: {
-      type: 'ADD_TODO';
-      payload: TodoType;
+      type: 'ADD_NOTIFICATION';
+      payload: NotificationType;
     }) => void;
   };
 
-  export type Messages = Parameters<MessageHandler['ADD_TODO']>[0];
+  export type Messages = Parameters<MessageHandler['ADD_NOTIFICATION']>[0];
 }

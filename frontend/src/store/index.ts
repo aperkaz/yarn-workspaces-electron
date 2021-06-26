@@ -1,13 +1,13 @@
 import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { TodoType } from '@app/shared';
+import { NotificationType } from '@app/shared';
 
 interface InitialState {
-  todos: TodoType[];
+  notifications: NotificationType[];
 }
 
 const initialState: InitialState = {
-  todos: []
+  notifications: []
 };
 
 const stateSlice = createSlice({
@@ -15,8 +15,8 @@ const stateSlice = createSlice({
   initialState,
   reducers: {
     resetState: () => initialState,
-    addTodo: (state, action: PayloadAction<TodoType>) => {
-      state.todos.push(action.payload);
+    addNotification: (state, action: PayloadAction<NotificationType>) => {
+      state.notifications.push(action.payload);
     }
   }
 });

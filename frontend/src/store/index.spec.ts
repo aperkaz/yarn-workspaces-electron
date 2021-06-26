@@ -7,41 +7,41 @@ describe('App reducer', () => {
   });
 
   it('should return the initial state', () => {
-    expect(store.getState()).toEqual({ todos: [] });
+    expect(store.getState()).toEqual({ notifications: [] });
   });
 
-  it('should add new todos', () => {
-    const NEW_TODO = { text: 'Test todo', isDone: false };
-    const NEW_TODO_2 = { text: 'Test todo2', isDone: false };
+  it('should add new notification', () => {
+    const NOTIFICATION = { text: 'Test notification' };
+    const NOTIFICATION_2 = { text: 'Test notification2' };
 
-    expect(store.getState()).toEqual({ todos: [] });
+    expect(store.getState()).toEqual({ notifications: [] });
 
-    store.dispatch(ACTIONS.addTodo(NEW_TODO));
+    store.dispatch(ACTIONS.addNotification(NOTIFICATION));
 
     expect(store.getState()).toEqual({
-      todos: [NEW_TODO]
+      notifications: [NOTIFICATION]
     });
 
-    store.dispatch(ACTIONS.addTodo(NEW_TODO_2));
+    store.dispatch(ACTIONS.addNotification(NOTIFICATION_2));
 
     expect(store.getState()).toEqual({
-      todos: [NEW_TODO, NEW_TODO_2]
+      notifications: [NOTIFICATION, NOTIFICATION_2]
     });
   });
 
   it('should reset state', () => {
-    const NEW_TODO = { text: 'Test todo', isDone: false };
+    const NOTIFICATION = { text: 'Test notification' };
 
-    store.dispatch(ACTIONS.addTodo(NEW_TODO));
+    store.dispatch(ACTIONS.addNotification(NOTIFICATION));
 
     expect(store.getState()).toEqual({
-      todos: [NEW_TODO]
+      notifications: [NOTIFICATION]
     });
 
     store.dispatch(ACTIONS.resetState());
 
     expect(store.getState()).toEqual({
-      todos: []
+      notifications: []
     });
   });
 });

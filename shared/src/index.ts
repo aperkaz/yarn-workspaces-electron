@@ -1,3 +1,3 @@
-export { TodoType } from './types';
+export { NotificationType } from './types';
 
 export * as API from './API';

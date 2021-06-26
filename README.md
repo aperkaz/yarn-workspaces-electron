@@ -99,6 +99,8 @@ yarn watch
 
 ```
 
+In order to refresh the Backend or Frontend window, you can press `command` + `R`.
+
 ## Building app for production
 
 ```bash

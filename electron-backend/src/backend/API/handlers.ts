@@ -1,29 +1,56 @@
+import sharp from 'sharp';
+
 import { API } from '@app/shared';
 import { send } from './utils';
 
+const os = require('os');
+sharp.concurrency(os.cpus() - 2);
+
+/**
+ * Example of native module. Generates an image.
+ */
+const processImage = async () => {
+  console.log(`[BE] process image`);
+
+  await sharp({
+    create: {
+      width: 8000,
+      height: 8000,
+      channels: 4,
+      background: { r: 0, g: 255, b: 0, alpha: 0.5 }
+    }
+  })
+    .toBuffer()
+    .catch();
+};
+
 const router: API.BE.MessageHandler = {
-  ADD_TODO_SYNC: (message) => {
-    console.log(`[BE] Added todo sync`);
+  PROCESS_IMAGE_ASYNC: async () => {
+    const start = new Date().getTime();
+    await processImage();
+    const end = new Date().getTime();
 
     send({
-      type: 'ADD_TODO',
+      type: 'ADD_NOTIFICATION',
       payload: {
-        isDone: message.payload.isDone,
-        text: `[BE sync] - ${message.payload.text}`
+        text: `[BE processed image] - ${end - start}ms`
       }
     });
 
     return true;
   },
-  ADD_TODO_ASYNC: async (message) => {
-    console.log(`[BE] Added todo async`);
-    await new Promise((r) => setTimeout(r, 2000));
+
+  PROCESS_IMAGE_BATCH: async () => {
+    console.log(`[BE] Process iamge batch`);
+
+    const start = new Date().getTime();
+    for (let i = 0; i < 10; i++) await processImage();
+    const end = new Date().getTime();
 
     send({
-      type: 'ADD_TODO',
+      type: 'ADD_NOTIFICATION',
       payload: {
-        isDone: message.payload.isDone,
-        text: `[BE async] - ${message.payload.text}`
+        text: `[BE processed x10 images] - ${end - start}ms`
       }
     });
 
@@ -31,16 +58,18 @@ const router: API.BE.MessageHandler = {
   }
 };
 
+/**
+ * Message handlers, for notifications comming from the fronted
+ */
 async function messageHander(message: API.BE.Messages) {
   console.log(`[BE] receive, type: ${message.type}`);
-  console.log(`[BE] receive, payload: ${JSON.stringify(message.payload)}`);
+  console.log(`[BE] receive, payload: ${JSON.stringify(message)}`);
 
   if (!router[message.type]) {
     return Promise.reject(`[BE] unhanded message type: ${message.type}`);
   }
 
-  // @ts-ignore
-  return await router[message.type](message);
+  return await router[message.type](message as any);
 }
 
 export default {
