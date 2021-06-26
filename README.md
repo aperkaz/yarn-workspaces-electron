@@ -20,6 +20,8 @@ The architecture of this starter is divided into three modules: `frontend`, `ele
 
 The code sharing between modules (the `shared` module) is managed with [yarn workspaces](https://classic.yarnpkg.com/en/docs/workspaces/).
 
+![Architecture](./img-arch-prod.png)
+
 ### Frontend
 
 **Stack**: [TypeScript](https://www.typescriptlang.org/) + [React (CRA)](https://github.com/facebook/create-react-app) + [Redux](https://redux-toolkit.js.org/) + [Storybook](https://storybook.js.org/)
